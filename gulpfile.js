@@ -1,35 +1,89 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var useref = require('gulp-useref');
-var gulpIf = require('gulp-if');
+var uglify = require('gulp-uglify');
+var concat = require('gulp-concat');
+var sourcemaps = require('gulp-sourcemaps');
 var cssnano = require('gulp-cssnano');
 var del = require('del');
 var runSeq = require('run-sequence');
+var browserify = require('browserify');
+var babelify = require('babelify');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
+var glob = require('glob');
+var browserSync = require('browser-sync').create();
 
 
 
-//  dev
-gulp.task('sass', function(){
-	return gulp.src('app/scss/**/*.scss')
-		.pipe(sass(''))
-		.pipe(gulp.dest('app/css'));
-});
+// dev
 
-
-
-// watchers
-gulp.task('watch', function(){
-	gulp.watch('app/scss/**/*.scss', ['sass']);
+// server
+gulp.task('browserSync', function(){
+	browserSync.init({
+		server: {
+			baseDir: 'dist'
+		},
+		port: 8081
+	});
 });
 
 
 
 // optimization & dist
-gulp.task('useref', function(){
-	return gulp.src('app/**/*.html')
-		.pipe(useref())
-		.pipe(gulpIf('*.css', cssnano()))
-		.pipe(gulp.dest('dist'));
+
+gulp.task('html', function(){
+	return gulp.src('app/index.html')
+		.pipe(gulp.dest('dist'))
+		.pipe(browserSync.reload({
+      		stream: true
+    	}));
+});
+
+
+
+gulp.task('sass', function(){
+	return gulp.src('app/scss/**/*.scss')
+		.pipe(sass())
+		.pipe(sourcemaps.init())
+			.pipe(concat('styles.css'))
+		.pipe(sourcemaps.write())
+		.pipe(cssnano())
+		.pipe(gulp.dest('dist'))
+		.pipe(browserSync.reload({
+      		stream: true
+    	}));
+});
+
+
+
+gulp.task('javascript', function () {
+	var entries = glob.sync('app/**/*.js');
+
+	var bundler = browserify({
+		entries: entries,
+		extensions: ['.js']
+	});
+	bundler.transform(babelify, { presets: ['es2015'] });
+
+	bundler.bundle()
+		.pipe(source('scripts.js'))
+		.pipe(buffer())
+		.pipe(sourcemaps.init({ loadMaps: true }))
+		.pipe(uglify())
+		.pipe(sourcemaps.write('./'))
+		.pipe(gulp.dest('dist'))
+		.pipe(browserSync.reload({
+      		stream: true
+    	}));
+});
+
+
+
+// watchers
+gulp.task('watch', ['browserSync'], function(){
+	gulp.watch('app/scss/**/*.scss' , ['sass']);
+	gulp.watch('app/**/*.html', ['html']);
+	gulp.watch('app/**/*.js', ['javascript']);
 });
 
 
@@ -41,11 +95,10 @@ gulp.task('clean:dist', function(){
 
 
 
+
+
+
 // build
-gulp.task('default', function(callback){
-
-});
-
-gulp.task('build',function(callback){
-
+gulp.task('default', function(){
+	runSeq('clean:dist', ['html', 'sass', 'javascript', 'browserSync', 'watch']);
 });
