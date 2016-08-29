@@ -1,7 +1,9 @@
-TransactionFormController.$inject = ['$scope', '$state'];
+TransactionFormController.$inject = ['$scope'];
 
-function TransactionFormController ($scope, $state) {
-	console.log("controller");
+function TransactionFormController ($scope) {
+
+	console.log('controller');
+
 }
 
 export default TransactionFormController;
