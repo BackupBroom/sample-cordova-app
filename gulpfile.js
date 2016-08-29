@@ -43,11 +43,11 @@ gulp.task('html', function(){
 
 gulp.task('sass', function(){
 	return gulp.src('app/scss/**/*.scss')
-		.pipe(sass())
-		.pipe(sourcemaps.init())
+		.pipe(sourcemaps.init({ loadMaps: true }))
+			.pipe(sass())
 			.pipe(concat('styles.css'))
-		.pipe(sourcemaps.write())
-		.pipe(cssnano())
+			.pipe(cssnano())
+		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest('dist'))
 		.pipe(browserSync.reload({
       		stream: true
@@ -63,13 +63,16 @@ gulp.task('javascript', function () {
 		entries: entries,
 		extensions: ['.js']
 	});
-	bundler.transform(babelify, { presets: ['es2015'] });
+	bundler.transform(babelify, {
+		presets: ['es2015'],
+		ignore: "bower_components"
+	});
 
 	bundler.bundle()
 		.pipe(source('scripts.js'))
 		.pipe(buffer())
 		.pipe(sourcemaps.init({ loadMaps: true }))
-		.pipe(uglify())
+			.pipe(uglify())
 		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest('dist'))
 		.pipe(browserSync.reload({
