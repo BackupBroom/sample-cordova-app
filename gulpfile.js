@@ -11,6 +11,7 @@ var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var glob = require('glob');
+var embedTemplates = require('gulp-angular-embed-templates');
 var browserSync = require('browser-sync').create();
 
 
@@ -32,7 +33,7 @@ gulp.task('browserSync', function(){
 // optimization & dist
 
 gulp.task('html', function(){
-	return gulp.src('app/index.html')
+	return gulp.src('app/**/*.html')
 		.pipe(gulp.dest('dist'))
 		.pipe(browserSync.reload({
       		stream: true
