@@ -1,5 +1,3 @@
-import homeController from '../home/home-controller.js';
-
 TransactionRoutingConfig.$inject = ['$stateProvider'];
 
 function TransactionRoutingConfig ($stateProvider) {
@@ -11,8 +9,7 @@ function TransactionRoutingConfig ($stateProvider) {
 		})
 		.state('transactions', {
 			url: '/',
-			templateUrl: '/home/home.html',
-			controller: homeController
+			template: '<home-page>'
 		});
 
  }
