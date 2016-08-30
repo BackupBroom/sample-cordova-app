@@ -66,6 +66,7 @@ gulp.task('javascript', function () {
 	});
 	bundler.transform(babelify, {
 		presets: ['es2015'],
+		plugins: ["transform-object-rest-spread"],
 		ignore: "bower_components"
 	});
 

@@ -1,12 +1,16 @@
 import angular from '../../bower_components/angular';
 
-TransactionsService.$inject = ['TransactionProvider'];
+TransactionsService.$inject = ['TransactionProvider', 'LocalStorageService'];
 
-function TransactionsService (Transaction) {
+function TransactionsService (Transaction, LocalStorageService) {
 
 	const service = this;
 
 	service.createTransaction = createTransaction;
+
+	console.log(LocalStorageService);
+
+	debugger;
 
 	return service;
 
