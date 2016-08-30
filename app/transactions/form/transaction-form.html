@@ -1,17 +1,17 @@
 <form
 	name="transaction-form"
-	ng-submit="updateTransaction()"
+	ng-submit="transactionForm.updateTransaction()"
 	class="transactions-form"
 >
 	<input 
 		type="text" 
 		placeholder="Enter Title" 
-		ng-model="transaction.name"
+		ng-model="transactionForm.name"
 	>
 	<input 
 		type="number" 
 		placeholder="Enter Amount" 
-		ng-model="transaction.amount"
+		ng-model="transactionForm.amount"
 	>
 	<button type="submit">Save</button>
 </form>

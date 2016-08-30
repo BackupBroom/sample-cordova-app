@@ -1,31 +1,18 @@
-TransactionFormController.$inject = ['$scope', '$state' ];
+TransactionFormController.$inject = ['$state'];
 
-function TransactionFormController ($scope, $state) {
+function TransactionFormController ($state) {
+
+	const vm = this;
 
 	console.log('controller');
 
-	var transactions = [];
+	vm.updateTransaction = updateTransaction;
 
-	$scope.updateTransaction = function () {
-
-		var transaction = {
-			name: $scope.transaction.name,
-			amount: $scope.transaction.amount,
-			date: new Date()
-		};
-
-		transactions.push(transaction);
-
-		$scope.transaction.name = '';
-		$scope.transaction.amount = '';
+	function updateTransaction () {
 
 		$state.go('transactions');
 
-		localStorage.setItem('transaction', angular.toJson(transaction));
-
-		// console.log(transactions);
-
-	};
+	}
 
 }
 

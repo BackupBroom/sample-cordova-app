@@ -9,7 +9,8 @@ function TransactionRoutingConfig ($stateProvider) {
 		.state('transaction-form', {
 			url: '/transaction',
 			templateUrl: '/transactions/form/transaction-form.html',
-			controller: TransactionFormController
+			controller: TransactionFormController,
+			controllerAs: 'transactionForm'
 		})
 		.state('transactions', {
 			url: '/',
