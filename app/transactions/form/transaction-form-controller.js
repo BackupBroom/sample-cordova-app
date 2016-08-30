@@ -4,13 +4,13 @@ function TransactionFormController ($scope, $state) {
 
 	console.log('controller');
 
-	// var transactions = [];
+	var transactions = [];
 
-	$scope.updateTransaction = function (transaction) {
+	$scope.updateTransaction = function () {
 
 		var transaction = {
-			name: transaction.name,
-			amount: transaction.amount,
+			name: $scope.transaction.name,
+			amount: $scope.transaction.amount,
 			date: new Date()
 		};
 
