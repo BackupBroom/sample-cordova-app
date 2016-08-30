@@ -73,7 +73,7 @@ gulp.task('javascript', function () {
 		.pipe(source('scripts.js'))
 		.pipe(buffer())
 		.pipe(sourcemaps.init({ loadMaps: true }))
-			.pipe(uglify())
+			// .pipe(uglify())
 		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest('dist'))
 		.pipe(browserSync.reload({
