@@ -6,10 +6,6 @@ function TransactionRoutingConfig ($stateProvider) {
 		.state('transaction-form', {
 			url: '/transaction',
 			template: '<transaction-form>'
-		})
-		.state('transactions', {
-			url: '/',
-			template: '<home-page>'
 		});
 
  }

@@ -1,10 +1,17 @@
-HomeController.$inject = ['$scope'];
+HomeController.$inject = ['TransactionsService'];
 
-function HomeController ($scope) {
+function HomeController (TransactionsService) {
 
 	const vm = this;
 
-	
+	vm.transactions = TransactionsService.getTransactions();
+	vm.deleteTransaction = deleteTransaction;
+
+	function deleteTransaction (transaction) {
+
+		vm.transactions = TransactionsService.deleteTransaction(transaction);
+
+	}
 
 }
 
