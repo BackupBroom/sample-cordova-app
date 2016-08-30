@@ -8,6 +8,7 @@ function Transaction (name, amount) {
 
 	this.name = name;
 	this.amount = amount;
+	this.date = Date.now();
 
 }
 

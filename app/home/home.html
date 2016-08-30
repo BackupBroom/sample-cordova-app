@@ -2,6 +2,7 @@
 	<ul ng-repeat="transaction in homePage.transactions">
 		<li>{{transaction.name}}</li>
 		<li>{{transaction.amount}}</li>
+		<li>{{transaction.date | date: "MMMM d"}}</li>
 		<button ng-click="homePage.deleteTransaction(transaction)">Delete</button>
 	</ul>
 </div>
