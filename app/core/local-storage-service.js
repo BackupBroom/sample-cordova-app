@@ -1,6 +1,8 @@
 import angular from '../../bower_components/angular';
 
-function LocalStorageService () {
+LocalStorageService.$inject = ['IdGeneratorService'];
+
+function LocalStorageService (IdGeneratorService) {
 
 	const service = this;
 
@@ -14,16 +16,28 @@ function LocalStorageService () {
 
 	service.item.get = getItem;
 	service.item.post = postItem;
-	service.item.update = putItem;
+	service.item.put = putItem;
 	service.item.delete = deleteItem;
 
 	return service;
 
 
 
+	function getId () {
+
+		const id = get('latestId') || 0;
+
+		return set('latestId', IdGeneratorService.createId(id));
+
+	}
+
+
+
 	function set (key, value) {
 
 		ls.setItem(`${prefix}-${key}`, angular.toJson(value));
+
+		return value;
 
 	}
 
@@ -54,7 +68,7 @@ function LocalStorageService () {
 			collection,
 			[
 				...items,
-				{ ...item, id: Math.random() }
+				{ ...item, id: getId() }
 			]
 		);
 
