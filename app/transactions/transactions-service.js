@@ -28,7 +28,7 @@ function TransactionsService (Transaction, LocalStorageService) {
 
 	function getTransactions () {
 
-		return LocalStorageService.get('/transactions')
+		return (LocalStorageService.get('/transactions') || [])
 			.map(obj => new Transaction(obj));
 
 	}

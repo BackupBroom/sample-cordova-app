@@ -14,13 +14,12 @@ function TransactionFormController ($state, $stateParams, TransactionsService) {
 
 		vm.name = '';
 		vm.amount = '';
-		vm.headerText = 'Add New';
 
 	} else {
 
 		vm.name = transaction.name;
 		vm.amount = transaction.amount;
-		vm.headerText = 'Edit';
+		vm.editing = true;
 
 	}
 

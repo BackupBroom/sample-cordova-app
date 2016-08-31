@@ -53,6 +53,7 @@ ul.transactions-list {
 		display: flex;
 		justify-content: space-between;
 	}
+}
 	.transaction-controls {
 		display: flex;
 		justify-content: flex-end;
@@ -63,7 +64,6 @@ ul.transactions-list {
 	.transaction-controls button + button {
 		margin-left: 1em;
 	}
-}
 
 .add-transaction-button {
 	position: absolute;

@@ -1,4 +1,4 @@
-<h1>{{transactionForm.headerText}} Transaction</h1>
+<h1>{{transactionForm.editing ? "Edit" : "Add New"}} Transaction</h1>
 
 <form
 	name="transaction-form"
@@ -17,5 +17,8 @@
 		ng-model="transactionForm.amount"
 		required
 	>
-	<button type="submit">Save</button>
+	<div class="transaction-controls">
+		<button ui-sref="transactions">Cancel</button>
+		<button type="submit">Save</button>
+	</div>
 </form>
