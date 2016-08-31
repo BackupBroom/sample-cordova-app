@@ -10,6 +10,7 @@ function TransactionsService (Transaction, LocalStorageService) {
 	service.createTransaction = createTransaction;
 	service.getTransactions = getTransactions;
 	service.deleteTransaction = deleteTransaction;
+	service.editTransaction = editTransaction;
 
 	return service;
 
@@ -36,6 +37,19 @@ function TransactionsService (Transaction, LocalStorageService) {
 	function deleteTransaction (transaction) {
 
 		return LocalStorageService.item.delete('/transactions', transaction.id);
+
+	}
+
+
+
+	function editTransaction (name, amount, id, date) {
+
+		console.log(name, amount, id, date);
+
+		const updatedTransaction = new Transaction(name, amount, id, date);
+
+		return LocalStorageService.item
+			.put('/transactions', id, updatedTransaction);
 
 	}
 

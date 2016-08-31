@@ -22,3 +22,52 @@ form.transactions-form {
 	    margin: 0 0 10px 0;
 	}
 }
+
+button {
+	border: 5px solid white;
+	-webkit-box-shadow:
+		inset 0 0 8px  rgba(0,0,0,0.1),
+		0 0 16px rgba(0,0,0,0.1);
+	-moz-box-shadow:
+		inset 0 0 8px  rgba(0,0,0,0.1),
+		0 0 16px rgba(0,0,0,0.1);
+	box-shadow:
+		inset 0 0 8px  rgba(0,0,0,0.1),
+		0 0 16px rgba(0,0,0,0.1);
+	padding: 15px;
+	background: rgba(255,255,255,0.5);
+	margin: 0 0 10px 0;
+	padding: 15px;
+}
+
+ul.transactions-list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+
+	li {
+		padding: 0 2em;
+	}
+
+	.transaction-info {
+		display: flex;
+		justify-content: space-between;
+	}
+	.transaction-controls {
+		display: flex;
+		justify-content: flex-end;
+	}
+	.transaction-controls button {
+		flex-basis: 6em;
+	}
+	.transaction-controls button + button {
+		margin-left: 1em;
+	}
+}
+
+.add-transaction-button {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}

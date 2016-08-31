@@ -5,7 +5,8 @@ function TransactionRoutingConfig ($stateProvider) {
 	$stateProvider
 		.state('transaction-form', {
 			url: '/transaction',
-			template: '<transaction-form>'
+			template: '<transaction-form>',
+			params: { transaction: null }
 		});
 
  }

@@ -7,6 +7,7 @@ import TransactionsService from './transactions-service.js';
 angular
 	.module('Transactions', [
 		'ui.router',
+		'Home',
 		'BudgetTracker.Utils'
 	])
 	.component('transactionForm', TransactionFormComponent)

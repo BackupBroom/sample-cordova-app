@@ -1,19 +1,45 @@
-TransactionFormController.$inject = [ '$state', 'TransactionsService' ];
+TransactionFormController.$inject = [
+	'$state',
+	'$stateParams',
+	'TransactionsService'
+];
 
-function TransactionFormController ($state, TransactionsService) {
+function TransactionFormController ($state, $stateParams, TransactionsService) {
 
 	const vm = this;
 
-	vm.name = '';
-	vm.amount = '';
+	const transaction = $stateParams.transaction;
 
-	console.log('controller');
+	if (null === transaction) {
 
-	vm.createTransaction = createTransaction;
+		vm.name = '';
+		vm.amount = '';
+		vm.headerText = 'Add New';
 
-	function createTransaction () {
+	} else {
 
-		TransactionsService.createTransaction(vm.name, vm.amount);
+		vm.name = transaction.name;
+		vm.amount = transaction.amount;
+		vm.headerText = 'Edit';
+
+	}
+
+	vm.submitTransaction = submitTransaction;
+
+
+
+	function submitTransaction () {
+
+		if (transaction) {
+
+			TransactionsService
+				.editTransaction(vm.name, vm.amount, transaction.id, transaction.date);
+
+		} else {
+
+			TransactionsService.createTransaction(vm.name, vm.amount);
+
+		}
 
 		$state.go('transactions');
 

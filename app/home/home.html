@@ -1,8 +1,21 @@
-<div>
-	<ul ng-repeat="transaction in homePage.transactions">
-		<li>{{transaction.name}}</li>
-		<li>{{transaction.amount}}</li>
-		<li>{{transaction.date | date: "MMMM d"}}</li>
-		<button ng-click="homePage.deleteTransaction(transaction)">Delete</button>
-	</ul>
-</div>
+<h1>Your Transactions</h1>
+
+<ul class="transactions-list">
+	<li ng-repeat="transaction in homePage.transactions">
+		<div class="transaction-info">
+			<div>
+				<p>{{transaction.name}}</p>
+				<p>{{transaction.date | date: "MMMM d"}}</p>
+			</div>
+			<div>
+				<p>{{transaction.amount | currency}}</p>
+			</div>
+		</div>
+		<div class="transaction-controls">
+			<button ng-click="homePage.deleteTransaction(transaction)">Delete</button>
+			<button ng-click="homePage.editTransaction(transaction)">Edit</button>
+		</div>
+	</li>
+</ul>
+
+<button ng-click="homePage.createTransaction()" class="add-transaction-button">Add Transaction</button>

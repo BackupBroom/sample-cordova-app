@@ -1,17 +1,21 @@
+<h1>{{transactionForm.headerText}} Transaction</h1>
+
 <form
 	name="transaction-form"
-	ng-submit="transactionForm.createTransaction()"
+	ng-submit="transactionForm.submitTransaction()"
 	class="transactions-form"
 >
-	<input 
-		type="text" 
-		placeholder="Enter Title" 
+	<input
+		type="text"
+		placeholder="Enter Title"
 		ng-model="transactionForm.name"
+		required
 	>
-	<input 
-		type="number" 
-		placeholder="Enter Amount" 
+	<input
+		type="number"
+		placeholder="Enter Amount"
 		ng-model="transactionForm.amount"
+		required
 	>
 	<button type="submit">Save</button>
 </form>
