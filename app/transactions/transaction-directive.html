@@ -1,0 +1,13 @@
+<div class="transaction-info" ng-click="transaction.toggleControls()">
+	<div>
+		<p>{{transaction.data.name}}</p>
+		<p>{{transaction.data.date | date: "MMMM d"}}</p>
+	</div>
+	<div>
+		<p>{{transaction.data.amount | currency}}</p>
+	</div>
+</div>
+<div class="transaction-controls" ng-if="transaction.controlsShown">
+	<button ng-click="transaction.onDelete()">Delete</button>
+	<button ng-click="transaction.onEdit()">Edit</button>
+</div>

@@ -1,21 +1,12 @@
 <h1>Your Transactions</h1>
 
 <ul class="transactions-list">
-	<li ng-repeat="transaction in homePage.transactions track by transaction.id">
-		<div class="transaction-info">
-			<div>
-				<p>{{transaction.name}}</p>
-				<p>{{transaction.date | date: "MMMM d"}}</p>
-			</div>
-			<div>
-				<p>{{transaction.amount | currency}}</p>
-			</div>
-		</div>
-		<div class="transaction-controls">
-			<button ng-click="homePage.deleteTransaction(transaction)">Delete</button>
-			<button ng-click="homePage.editTransaction(transaction)">Edit</button>
-		</div>
-	</li>
+	<transaction
+		ng-repeat="transaction in homePage.transactions track by transaction.id"
+		data="transaction"
+		on-edit="homePage.editTransaction(transaction)"
+		on-delete="homePage.deleteTransaction(transaction)"
+	></transaction>
 </ul>
 
 <button ui-sref="transaction-form" class="add-transaction-button">Add Transaction</button>
