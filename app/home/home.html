@@ -1,7 +1,7 @@
 <h1>Your Transactions</h1>
 
 <ul class="transactions-list">
-	<li ng-repeat="transaction in homePage.transactions">
+	<li ng-repeat="transaction in homePage.transactions track by transaction.id">
 		<div class="transaction-info">
 			<div>
 				<p>{{transaction.name}}</p>

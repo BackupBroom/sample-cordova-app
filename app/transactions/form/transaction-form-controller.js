@@ -33,11 +33,19 @@ function TransactionFormController ($state, $stateParams, TransactionsService) {
 		if (transaction) {
 
 			TransactionsService
-				.editTransaction(vm.name, vm.amount, transaction.id, transaction.date);
+				.editTransaction({
+					name: vm.name,
+					amount: vm.amount,
+					id: transaction.id,
+					date: transaction.date
+				});
 
 		} else {
 
-			TransactionsService.createTransaction(vm.name, vm.amount);
+			TransactionsService.createTransaction({
+				name: vm.name,
+				amount: vm.amount
+			});
 
 		}
 

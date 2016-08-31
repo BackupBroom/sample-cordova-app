@@ -14,9 +14,9 @@ function TransactionsService (Transaction, LocalStorageService) {
 
 	return service;
 
-	function createTransaction (name, amount) {
+	function createTransaction (obj) {
 
-		const transaction = new Transaction(name, amount);
+		const transaction = new Transaction(obj);
 
 		console.log(transaction);
 
@@ -28,7 +28,8 @@ function TransactionsService (Transaction, LocalStorageService) {
 
 	function getTransactions () {
 
-		return LocalStorageService.get('/transactions');
+		return LocalStorageService.get('/transactions')
+			.map(obj => new Transaction(obj));
 
 	}
 
@@ -42,14 +43,16 @@ function TransactionsService (Transaction, LocalStorageService) {
 
 
 
-	function editTransaction (name, amount, id, date) {
+	function editTransaction (obj) {
 
-		console.log(name, amount, id, date);
+		console.log(obj);
 
-		const updatedTransaction = new Transaction(name, amount, id, date);
+		const updatedTransaction = new Transaction(obj);
+
+		console.log('UpdatedTransaction: ', updatedTransaction);
 
 		return LocalStorageService.item
-			.put('/transactions', id, updatedTransaction);
+			.put('/transactions', updatedTransaction.id, updatedTransaction);
 
 	}
 

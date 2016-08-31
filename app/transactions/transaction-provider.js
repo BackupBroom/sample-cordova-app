@@ -4,11 +4,14 @@ function TransactionProvider () {
 
 }
 
-function Transaction (name, amount) {
+function Transaction (config) {
 
-	this.name = name;
-	this.amount = amount;
-	this.date = Date.now();
+	this.name = config.name;
+	this.amount = config.amount;
+	this.id = config.id;
+	this.date = config.date || Date.now();
+
+	return Object.freeze(this);
 
 }
 
