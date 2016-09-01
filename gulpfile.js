@@ -74,7 +74,7 @@ gulp.task('javascript', function () {
 		.pipe(source('scripts.js'))
 		.pipe(buffer())
 		.pipe(sourcemaps.init({ loadMaps: true }))
-			// .pipe(uglify())
+			.pipe(uglify())
 		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest('dist'))
 		.pipe(browserSync.reload({
@@ -98,12 +98,25 @@ gulp.task('clean:dist', function(){
 	return del.sync('dist');
 });
 
-
-
+gulp.task('clean:www', function(){
+	return del.sync('cordova-app/www');
+});
 
 
 
 // build
 gulp.task('default', function(){
 	runSeq('clean:dist', ['html', 'sass', 'javascript', 'browserSync', 'watch']);
+});
+
+
+
+// cordova
+gulp.task('clone', function(){
+	return gulp.src('dist/**/*')
+		.pipe(gulp.dest('cordova-app/www'));
+});
+
+gulp.task('cordova', function(){
+	runSeq('clean:www', ['html', 'sass', 'javascript'], 'clone');
 });
